@@ -187,14 +187,15 @@ class FuzzyDate
     if unknown?
       str = "unknown"
     else
-      str = ""
-      str = "circa "                        if circa?
-      str+= FDate::DAYNAMES[wday]    + " "  if wday 
-      str+= day.to_s + " "                  if day 
-      str+= FDate::MONTHNAMES[month] + " "  if month
-      str+= year.to_s                       if year 
-      str += " bce"                         if bce?
-      str.strip
+      "#{year}-#{month}-#{day}"
+      #str = ""
+      #str = "circa "                        if circa?
+      #str+= FDate::DAYNAMES[wday]    + " "  if wday
+      #str+= day.to_s + " "                  if day
+      #str+= FDate::MONTHNAMES[month] + " "  if month
+      #str+= year.to_s                       if year
+      #str += " bce"                         if bce?
+      #str.strip
     end
   end
   

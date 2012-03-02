@@ -289,7 +289,12 @@ if defined? ActiveRecord::Base
     
           def #{name}=(s)
              if s.kind_of? String
-                 self['#{name}'] = FuzzyDate.parse(s).to_db unless s.strip.empty?
+                if s.present? && s.include?('-')
+                  date_fields = s.split('-')
+                  self['#{name}'] = FuzzyDate.new(date_fields[0].try(:to_i), date_fields[1].try(:to_i), date_fields[2].try(:to_i)).to_db
+                else
+                  self['#{name}'] = FuzzyDate.parse(s).to_db unless s.strip.empty?
+                end
              elsif s.kind_of? FuzzyDate
                  self['#{name}']=s.to_db
              elsif !s
